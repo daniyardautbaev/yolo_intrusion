@@ -1,4 +1,9 @@
-venv/
+.venv/
 __pycache__/
 *.pyc
+.DS_Store
+*.sqlite3
 .env
+.idea/
+.vscode/
+assets/*.mp4
