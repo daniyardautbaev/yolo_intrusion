@@ -1,25 +1,21 @@
-
-from ultralytics import YOLO 
-import numpy as np
+from ultralytics import YOLO
 
 class YoloDetector:
-    def __init__(self, weights="yolov8n.pt", device="cpu"):
-        self.model = YOLO(weights, device=device)
+    def __init__(self, weights="yolov8n.pt"):
 
-    def predict_people(self, frame, conf=0.4):
-        """
-        Возвращает список детекций людей:
-        [{ 'box': [x1,y1,x2,y2], 'conf': 0.9 }, ...]
-        """
-        results = self.model.predict(source=frame, conf=conf, imgsz=640, verbose=False)
+        self.model = YOLO(weights)
+
+    def predict_people(self, frame, conf=0.4, device="cpu"):
+
+        results = self.model.predict(frame, conf=conf, device=device, verbose=False)
         detections = []
-        r = results[0]
-        boxes = r.boxes  
-        for box in boxes:
-            cls = int(box.cls[0])
+        for r in results:
+            for box in r.boxes:
+                cls = int(box.cls)
 
-            if cls == 0:
-                xyxy = box.xyxy[0].cpu().numpy() 
-                conf_val = float(box.conf[0].cpu().numpy())
-                detections.append({'box': xyxy.tolist(), 'conf': conf_val})
+                if cls == 0:
+                    detections.append({
+                        "box": box.xyxy[0].tolist(),
+                        "confidence": float(box.conf)
+                    })
         return detections
