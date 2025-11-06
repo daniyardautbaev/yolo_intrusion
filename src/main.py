@@ -1,6 +1,6 @@
 import cv2
 import time
-from io.zones_io import load_zones 
+from io_utils.zones_io import load_zones
 
 ZONES_PATH = "restricted_zones.json"
 VIDEO_PATH = "assets/test.mp4"
