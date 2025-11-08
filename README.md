@@ -15,11 +15,14 @@ git clone https://github.com/daniyardautbaev/yolo_intrusion.git
 cd yolo_intrusion
 ```
 Установи зависимости:
+```bash
 pip install -r requirements.txt
-
+```
 Запуск
-python3 src/main.py
 
+```bash
+python3 src/main.py
+```
 
 Как работает система
 Модель YOLOv8 обнаруживает людей на видео.
@@ -66,4 +69,5 @@ Python 3.10+
 
 
 ![Пример работы системы](assets/demo3.png)
+
 
